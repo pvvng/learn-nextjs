@@ -9,8 +9,6 @@
 - **Render의 의미**: 
   - 자바스크립트 함수(e.g., React)를 브라우저가 이해할 수 있는 형식으로 변환하는 작업.
 
----
-
 ## Hydration Process
 
 - **Hydration**: 단순 HTML을 React 애플리케이션으로 초기화하는 작업.
@@ -21,8 +19,6 @@
 - **특징**: 모든 컴포넌트가 SSR(Server-side Rendering)을 수행하지만, **hydration은 모든 컴포넌트에서 발생하지 않음**.
   - `use client` 키워드가 붙은 컴포넌트만 hydrate.
   - 클라이언트에서 상호작용(interactive)이 필요함을 명시.
-
----
 
 ## Next.js 렌더링 순서
 
@@ -36,8 +32,6 @@
    - `use client`가 명시된 컴포넌트만 **HTML을 React Component로 전환**.
    - **Hydration 정의**:
      - 단순 HTML을 "Interactive Component"로 만드는 과정.
-
----
 
 ## 결론
 
