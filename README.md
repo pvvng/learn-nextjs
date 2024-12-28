@@ -40,3 +40,41 @@
 3. **서버 컴포넌트의 속도 이점**:
    - 다운받는 JavaScript의 양이 적음 → 로딩 속도 향상.
    - 서버 컴포넌트는 상호작용이 없으므로 fetch 작업에서도 보안 우려가 적음 (클라이언트로 데이터가 전송되지 않기 때문).
+
+
+# Fetch 최적화 방법
+
+## 방법 1: `Promise.all`로 병렬 통신
+- **문제점**: `await`를 연달아 사용하면(직렬 fetch) 시간이 너무 오래 걸림.
+- **해결**: `Promise.all`을 활용하여 병렬로 `fetch`를 처리하여 시간을 단축시킴.
+- **주의사항**: 두 통신이 모두 완료될 때까지 UI가 보이지 않는다는 문제가 있음.
+
+```javascript
+const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
+```
+
+## 방법 2: `Suspense`를 활용하여 컴포넌트를 나눠서 대기하기
+- **원리**: 컴포넌트를 나누어 각각 필요한 데이터를 fetch하도록 쪼갬.
+- **장점**: 
+  - `Suspense`로 로딩 상태일 때 `fallback`을 보여줌.
+  - 둘 중 하나가 통신 시간이 오래 걸려도 먼저 완료된 데이터만 렌더링 가능.
+  - 병렬적으로 데이터를 처리하면서도, 먼저 로딩된 부분부터 사용자에게 보여줄 수 있음.
+
+### 코드 예시:
+```tsx
+import { Suspense } from "react";
+
+function App({ id }) {
+  // Loading 컴포넌트는 오직 client만 가능함.
+  return (
+    <>
+      <Suspense fallback={<Loading />}>
+        <MovieComponent id={id} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <VideosComponent id={id} />
+      </Suspense>
+    </>
+  );
+}
+```
