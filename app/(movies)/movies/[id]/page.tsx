@@ -1,16 +1,29 @@
 import { Suspense } from "react";
-import MovieInfo from "../../../../components/movie-info";
+import MovieInfo, { getMovie } from "../../../../components/movie-info";
 import MovieVideos from "../../../../components/movie-videos";
-
-export const metadata = {
-  title: "Movie",
-};
 
 interface IParams {
   params: Promise<{ id: string }>;
 }
 
-export default async function MovieDetail({ params }: IParams) {
+/**
+ * fetch를 통해 metadata를 반환하여 사용하기
+ * 동적인 metadata title을 사용 가능함
+ * 
+ * server component의 dynamic route parameter처럼 
+ * generateMetadata도 paramas를 가지고 있다
+ */
+export async function generateMetadata({ params }: IParams) {
+  const { id } = await params;
+  // getMovie 두번 사용도 ㄱㅊ음 어짜피 캐싱되니까
+  const movie = await getMovie(id);
+
+  return {
+    title: movie.title,
+  };
+}
+
+export default async function MovieDetailPage({ params }: IParams) {
   const { id } = await params;
 
   // fetch 최적화 방법 1 / Promise.all로 병렬 통신

@@ -78,3 +78,33 @@ function App({ id }) {
   );
 }
 ```
+
+# `generateMetadata`로 동적 Metadata 처리하기
+
+## 요약
+- `fetch`를 써서 `metadata`를 반환하고 활용 가능.
+- `metadata title`을 동적으로 설정할 수 있음.
+
+---
+
+## 주요 포인트
+
+- `server component`의 dynamic route parameter처럼 `generateMetadata`도 `params`를 받을 수 있음.
+
+---
+
+## 코드 설명
+
+```typescript
+export async function generateMetadata({ params }: IParams) {
+  // dynamic route parameter 꺼내기
+  const { id } = await params; 
+  // `id`로 영화 데이터 가져오기
+  // 이후 getMovie가 사용되어도 어짜피 캐싱되니까 부담 없음
+  const movie = await getMovie(id); 
+
+  return {
+    title: movie.title, // 동적 title 설정
+  };
+}
+```
