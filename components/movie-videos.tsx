@@ -1,5 +1,5 @@
+import { API_URL } from "../constants/api_url";
 import styles from "../styles/movie-videos.module.css";
-import { API_URL } from "../app/(home)/page";
 
 async function getVideos(id: string) {
   // video data 불러오는데만 시간 지연 발생상황 가정
