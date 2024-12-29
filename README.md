@@ -85,13 +85,9 @@ function App({ id }) {
 - `fetch`를 써서 `metadata`를 반환하고 활용 가능.
 - `metadata title`을 동적으로 설정할 수 있음.
 
----
-
 ## 주요 포인트
 
 - `server component`의 dynamic route parameter처럼 `generateMetadata`도 `params`를 받을 수 있음.
-
----
 
 ## 코드 설명
 
