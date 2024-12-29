@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Movie from "../../components/movie";
+import styles from "../../styles/home.module.css";
 
 export const metadata = {
   title: "Home",
@@ -21,11 +22,14 @@ export default async function HomePage() {
   // isLoading ? "Loading..." : <HomePage /> 랑 비슷한 동작
   // 다만, 위는 client에서, 이는 서버 컴포넌트에서 동작
   return (
-    <div>
+    <div className={styles.container}>
       {movies.map((movie) => (
-        <li key={movie.id}>
-          <Link href={`movies/${movie.id}`}>{movie.title}</Link>
-        </li>
+        <Movie
+          key={movie.id}
+          id={movie.id}
+          title={movie.title}
+          poster_path={movie.poster_path}
+        />
       ))}
     </div>
   );

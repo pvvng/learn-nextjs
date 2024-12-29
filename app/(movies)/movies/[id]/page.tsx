@@ -26,8 +26,6 @@ export default async function MovieDetail({ params }: IParams) {
   // 즉, 병렬적으로 데이터 처리가 가능하면서, 먼저 로딩된 부분을 렌더링 가능해지는것.
   return (
     <div>
-      {/* 즉각적으로 렌더링되는 부분 */}
-      <h3>Movie Detail Page</h3>
       {/* await 하는 부분 */}
       <Suspense fallback={<h1>Loading... MovieDetail</h1>}>
         <MovieInfo id={id} />
