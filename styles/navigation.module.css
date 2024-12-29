@@ -1,0 +1,4 @@
+/* 클래스로 작명해야함. 요소로 작명시 오류 발생 */
+.nav {
+  background-color: red;
+}

@@ -28,12 +28,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+// 이런 식으로 스타일 주는 이유 => css간 충돌을 피하기 위함
+import styles from "../styles/navigation.module.css";
 
 export default function Navigation() {
   const path = usePathname();
 
   return (
-    <nav>
+    <nav className={styles.nav}>
       <ul>
         <li>
           <Link href="/">Home</Link>
